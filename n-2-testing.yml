@@ -6,14 +6,8 @@ stages:
     displayName: Build job
     pool: Hosted
     steps:
-    - script: echo Hello, world! This is CI job
-      displayName: 'Run a one-line script'
-
     - task: PublishPipelineArtifact@0
       displayName: Create Artifact
       inputs:
         artifactName: Artifact1
         targetPath: .
-
-    - upload: .
-      artifact: Extension
