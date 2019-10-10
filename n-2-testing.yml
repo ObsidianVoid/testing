@@ -13,7 +13,7 @@ stages:
       displayName: Create Artifact
       inputs:
         artifactName: Artifact1
-        targetPath: BVT\testFolder
+        targetPath: .
 
-    - upload: BVT\Extension
+    - upload: .
       artifact: Extension
