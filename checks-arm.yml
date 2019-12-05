@@ -1,0 +1,17 @@
+stages:
+- stage: first
+  jobs:
+  - job: server
+    pool: server
+    continueOnError: true
+    steps:
+    - task: Delay@1
+      displayName: 'Delay by 0 minutes'
+      continueOnError: true
+
+    - task: AzureMonitor@1
+      displayName: 'Query Azure Monitor alerts'
+      inputs:
+        connectedServiceNameARM: '709140cf-3de1-4260-b80e-e7a27355d9dc'
+        ResourceGroupName: abc
+      continueOnError: true
