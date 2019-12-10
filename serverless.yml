@@ -1,0 +1,37 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+stages:
+- stage: first
+  jobs:
+  - job: server
+    pool: server
+    continueOnError: true
+    steps:
+    - task: InvokeRESTAPI@1
+      displayName: 'Invoke REST API: POST'
+      inputs:
+        serviceConnection: 'random generic'
+      continueOnError: true
+
+    - task: PublishToAzureServiceBus@1
+      displayName: 'Publish to Azure Service Bus'
+      inputs:
+        azureSubscription: 'random bus'
+      continueOnError: true
+
+    - task: AzureMonitor@1
+      displayName: 'Query Azure Monitor alerts'
+      inputs:
+        connectedServiceNameARM: managed
+        ResourceGroupName: abc
+      continueOnError: true
+
+    - task: queryWorkItems@0
+      displayName: 'Query Work Items'
+      inputs:
+        queryId: '73469f3c-039c-4acc-b057-9ba47405a5db'
+        maxThreshold: 1
+      continueOnError: true
